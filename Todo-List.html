@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To-Do List</title>
+
+
+
+    <style>
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-image: url('https://source.unsplash.com/1600x900/?greenry,nature,hillstations');
+            background-size: cover;
+        }
+
+        .container {
+            width: 40%;
+            min-width: 470px;
+            position: absolute;    /*from parent elemnts */
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            background: rgb(237, 198, 237);
+            border-radius: 15px;
+
+        }
+
+        #newtask {
+            position: relative;
+            padding: 30px 20px;
+        }
+
+        #newtask input {
+            width: 75%;
+            height: 45px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            border: 2px solid #d1d3d4;
+            padding: 12px;
+            color: #111111;
+            font-weight: 500;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        #newtask input:focus {
+            outline: none;
+            border-color: #c7ec0d;
+        }
+
+        #newtask button {
+            position: relative;
+            float: right;
+            width: 20%;
+            height: 45px;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            background-color: #7ce19e;
+            border: none;
+            color: #160b0b;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #tasks {
+            background-color: rgb(237, 198, 237);
+            padding: 30px 20px;
+            margin-top: 10px;
+            border-radius: 10px;
+            width: 100%;
+            position: relative;
+        }
+
+        .task {
+            background-color: #c5e1e6;
+            height: 50px;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            display: flex;
+            border-radius: 5px;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #939697;
+            cursor: pointer;
+        }
+
+        .task span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .task button {
+            background-color: #fa0505;
+            color: #ffffff;
+            height: 100%;
+            width: 40px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="newtask">
+            <input type="text" placeholder="Enter new task">
+            <button id="push">Add</button>
+        </div>
+
+        <div id="tasks"></div>
+    </div>
+
+
+    <script type="text/javascript">
+        document.getElementById('push').onclick = function () {
+            if (document.querySelector('#newtask input').value.length == 0) {
+                alert("Please Enter a Task")
+            }
+            else {
+                document.getElementById('tasks').innerHTML += `
+                        <div class="task">
+                            <span id="taskname">
+                                ${document.querySelector('#newtask input').value}
+                            </span>
+                            <button class="delete">X</button>
+                        </div> `;
+        
+            document.querySelector('#newtask input').value = ""  // to empty todo list
+
+            //  to delete task by delete button
+            var current_tasks = document.querySelectorAll(".delete");
+            for (var i = 0; i < current_tasks.length; i++) {
+                current_tasks[i].onclick = function () {
+                        this.parentNode.remove();
+                }
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>
